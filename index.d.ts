@@ -21,11 +21,11 @@ import { StyleProp, ViewStyle } from 'react-native';
     user?: ChatWootUser;
     // This can actually be any object
     customAttributes?: Record<string, unknown>;
-    containerStyles?: StyleProp<ViewStyle>
+    containerStyles?: StyleProp<ViewStyle>;
     coverScreen?: boolean;
   }
 
-  
-declare class ChatWootWidget extends React.Component<ChatWootWidgetProps, any> { }  
+
+declare class ChatWootWidget extends React.Component<ChatWootWidgetProps, any> { }
 export default ChatWootWidget;
 

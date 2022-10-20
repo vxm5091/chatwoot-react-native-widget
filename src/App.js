@@ -52,7 +52,7 @@ const ChatWootWidget = ({
 
   return (
     <Modal
-      style={{...styles.modal, ...containerStyle}}
+      style={{ ...styles.modal, height: 540 }}
       coverScreen={coverScreen}
       isVisible={isModalVisible}
       onBackdropPress={closeModal}
