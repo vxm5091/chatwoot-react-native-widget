@@ -19,7 +19,7 @@ const propTypes = {
   locale: PropTypes.string,
   customAttributes: PropTypes.shape({}),
   closeModal: PropTypes.func,
-  containerStyle: PropTypes.shape({}),
+  containerStyle: PropTypes.any,
   coverScreen: PropTypes.bool,
 };
 
@@ -52,7 +52,7 @@ const ChatWootWidget = ({
 
   return (
     <Modal
-      style={{ ...styles.modal, height: 540 }}
+      style={[styles.modal, containerStyle ]}
       coverScreen={coverScreen}
       isVisible={isModalVisible}
       onBackdropPress={closeModal}

@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   mainView: {
     flex: 1,
     borderRadius: 16,
+    position: "relative",
   },
 });
 export default styles;
