@@ -1,5 +1,16 @@
-declare module '@chatwoot/react-native-widget' {
-  import React from 'react';
+import React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
+
+
+// declare module '@chatwoot/react-native-widget' {
+
+  export interface ChatWootUser {
+    identifier?: string;
+    name?: string;
+    avatar_url?: string;
+    email?: string;
+    identifier_hash?: string;
+  }
 
   export interface ChatWootWidgetProps {
     websiteToken: string;
@@ -7,18 +18,13 @@ declare module '@chatwoot/react-native-widget' {
     baseUrl: string;
     closeModal: () => void;
     isModalVisible: boolean;
-    user?: {
-      identifier?: string;
-      name?: string;
-      avatar_url?: string;
-      email?: string;
-      identifier_hash?: string;
-    };
+    user?: ChatWootUser;
     // This can actually be any object
     customAttributes?: Record<string, unknown>;
+    containerStyles?: StyleProp<ViewStyle>
   }
 
-  class ChatWootWidget extends React.Component<ChatWootWidgetProps, any> {}
-  export default ChatWootWidget;
-}
+  
+declare class ChatWootWidget extends React.Component<ChatWootWidgetProps, any> { }  
+export default ChatWootWidget;
 

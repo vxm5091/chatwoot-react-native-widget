@@ -19,6 +19,7 @@ const propTypes = {
   locale: PropTypes.string,
   customAttributes: PropTypes.shape({}),
   closeModal: PropTypes.func,
+  containerStyle: PropTypes.shape({}),
 };
 
 const defaultProps = {
@@ -36,6 +37,7 @@ const ChatWootWidget = ({
   locale,
   customAttributes,
   closeModal,
+  containerStyle,
 }) => {
   const [cwCookie, setCookie] = useState('');
   useEffect(() => {
@@ -48,7 +50,7 @@ const ChatWootWidget = ({
 
   return (
     <Modal
-      style={styles.modal}
+      style={[styles.modal, containerStyle]}
       coverScreen
       isVisible={isModalVisible}
       onBackdropPress={closeModal}
