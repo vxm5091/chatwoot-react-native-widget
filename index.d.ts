@@ -22,6 +22,7 @@ import { StyleProp, ViewStyle } from 'react-native';
     // This can actually be any object
     customAttributes?: Record<string, unknown>;
     containerStyles?: StyleProp<ViewStyle>
+    coverScreen?: boolean;
   }
 
   
