@@ -1,8 +1,9 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useRef, useState, useMemo } from 'react';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 import PropTypes from 'prop-types';
 import { isJsonString, storeHelper, generateScripts, getMessage } from './utils';
+
 const propTypes = {
   websiteToken: PropTypes.string.isRequired,
   baseUrl: PropTypes.string.isRequired,
@@ -35,6 +36,8 @@ const WebViewComponent = ({
   closeModal,
 }) => {
   let widgetUrl = `${baseUrl}/widget?website_token=${websiteToken}&locale=en`;
+  const webViewRef = useRef(null);
+  const [canGoBack, setCanGoBack] = useState(false);
 
   if (cwCookie) {
     widgetUrl = `${widgetUrl}&cw_conversation=${cwCookie}`;
@@ -44,6 +47,19 @@ const WebViewComponent = ({
     locale,
     customAttributes,
   });
+
+  
+  
+  const handleGoBack = () => {
+    webViewRef.current.goBack();
+  }
+
+  const renderBackButton = useMemo(() => {
+    if (!canGoBack) return null;
+    return (<Pressable onPress={handleGoBack} style={styles.button}>
+      <Text style={styles.buttonLabel}>{"<"}</Text>
+    </Pressable>)
+  })
 
   return (
     <WebView
@@ -72,19 +88,48 @@ const WebViewComponent = ({
       sharedCookiesEnabled
       javaScriptEnabled={true}
       domStorageEnabled={true}
-      style={styles.WebViewStyle}
+      // !this doesn't point to anything
+      style={styles.modal}
       injectedJavaScript={injectedJavaScript}
       scrollEnabled
-    />
+      allowsBackForwardNavigationGestures
+      ref={webViewRef}
+      onNavigationStateChange={(navState) => {
+        setCanGoBack(navState.canGoBack);
+      }}
+    >
+      {renderBackButton}
+    </WebView>
   );
 };
 
 const styles = StyleSheet.create({
   modal: {
     flex: 1,
-    borderRadius: 4,
+    // borderRadius: 4,
     overflow: 'hidden',
+    position: "relative",
   },
+  button: {
+    height: 32,
+    width: 32,
+    borderRadius: 24,
+    backgroundColor: "grey",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowRadius: 5,
+    shadowColor: "black",
+    shadowOpacity: 0.4,
+    shadowOffset: { width: 0, height: 3 },
+    position: "absolute",
+    top: 24,
+    left: 24,
+  },
+  buttonLabel: {
+    fontSize: 16,
+    color: "#EEEEEE",
+    textAlignVertical: "center"
+  }
 });
 WebViewComponent.defaultProps = defaultProps;
 WebViewComponent.propTypes = propTypes;

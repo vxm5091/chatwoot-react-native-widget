@@ -21,7 +21,7 @@ import { StyleProp, ViewStyle } from 'react-native';
     user?: ChatWootUser;
     // This can actually be any object
     customAttributes?: Record<string, unknown>;
-    containerStyles?: StyleProp<ViewStyle>;
+    containerStyle?: StyleProp<ViewStyle>;
     coverScreen?: boolean;
   }
 
